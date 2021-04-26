@@ -3,7 +3,7 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: gableroux/unity3d:2019.4.9f1-android
+    container: unityci/editor:ubuntu-2019.4.9f1-android-0.12.0
     steps:
         - name: Checkout Project
           uses: actions/checkout@v1
