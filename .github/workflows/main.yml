@@ -13,11 +13,11 @@ jobs:
         
         # Activate unity
         - name: Activate Unity
-          run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
+          run: unity-editor -quit -batchmode -nographics -silent-crashes -logFile -manualLicenseFile .github/Unity_v2019.x.ulf || exit 0
         
         # Build Windows and OSX
         - name: Build Windows Player
-          run: /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -noUpm -logFile -projectPath . -executeMethod BuildProject.BuildAndroid ./AndroidBuilds/testBuild.apk
+          run: unity-editor -quit -batchmode -nographics -silent-crashes -noUpm -logFile -projectPath . -executeMethod BuildProject.BuildAndroid ./AndroidBuilds/testBuild.apk
        
         - name: Archive Windows Build
           uses: actions/upload-artifact@v1
