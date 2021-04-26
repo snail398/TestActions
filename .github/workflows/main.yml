@@ -2,7 +2,7 @@ name: CI
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     container: unityci/editor:ubuntu-2019.4.9f1-android-0.12.0
     steps:
         - name: Checkout Project
@@ -17,10 +17,15 @@ jobs:
         
         # Build Windows and OSX
         - name: Build Windows Player
-          run: unity-editor -quit -batchmode -nographics -silent-crashes -noUpm -logFile -projectPath . -executeMethod BuildProject.BuildAndroid ./AndroidBuilds/testBuild.apk
+          run: unity-editor -quit -batchmode -nographics -silent-crashes -noUpm -logFile -projectPath . -executeMethod BuildProject.BuildAndroid ./testBuild.apk
        
-        - name: Archive Windows Build
-          uses: actions/upload-artifact@v1
+        - uses: actions/setup-python@v2
           with:
-            name: AndroidApks
-            path: ./AndroidBuilds
+            python-version: '3.6'
+        - uses: BSFishy/pip-action@v1
+          with:
+            packages: |
+              yadisk
+
+        - name: Archive Windows Build
+          run: python upload.py testBuild.apk
