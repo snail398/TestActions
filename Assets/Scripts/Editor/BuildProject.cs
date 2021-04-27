@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Linq;
 using UnityEditor; //Note, this script must reside in a folder called 'Editor' or the compilation will fail at this point!
+using UnityEngine;
 
 public class BuildProject
 {
+    [MenuItem("Tools/Initialization Project")]
     static string[] GetScenePaths()
     {
         string[] scenes = new string[EditorBuildSettings.scenes.Length];
         for (int i = 0; i < scenes.Length; i++)
         {
             scenes[i] = EditorBuildSettings.scenes[i].path;
+            Debug.Log(EditorBuildSettings.scenes[i].path);
         }
         return scenes;
     }
